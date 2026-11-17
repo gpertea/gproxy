@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>gproxy</title>
+  <link rel="stylesheet" href="popup.css">
+  <script type="module" src="popup.js"></script>
+</head>
+<body>
+  <main>
+    <header><h1>gproxy</h1><span id="status" role="status">Checking...</span></header>
+    <p class="hint" id="detail">Your proxy. Your connection.</p>
+    <div class="modes" aria-label="Connection mode">
+      <button id="direct" type="button">Direct</button>
+      <button id="proxy" type="button">Use proxy</button>
+    </div>
+    <p id="message" role="alert"></p>
+    <details id="configDetails">
+    <summary>Proxy settings</summary>
+    <form id="settings">
+      <fieldset>
+        <legend>Proxy endpoint</legend>
+        <label for="scheme">Protocol</label>
+        <select id="scheme"><option value="socks5">SOCKS5</option><option value="http">HTTP</option><option value="https">HTTPS</option></select>
+        <label for="host">Host or IP</label>
+        <input id="host" type="text" placeholder="proxy.example.org" maxlength="253" required spellcheck="false" autocomplete="off">
+        <label for="port">Port</label>
+        <input id="port" type="number" min="1" max="65535" required>
+        <label class="check"><input id="bypassLan" type="checkbox"> Direct access to LAN IP ranges</label>
+        <p class="hint">Private IPv4 and IPv6 ULA ranges. Chromium always keeps loopback and link-local addresses direct.</p>
+        <label for="bypass">Additional direct destinations</label>
+        <textarea id="bypass" rows="3" maxlength="8192" spellcheck="false" placeholder="*.example.internal&#10;10.20.0.0/16"></textarea>
+        <p class="hint">One hostname, *.domain pattern, IP or CIDR per line. Use &lt;local&gt; for all single-label names. IP ranges match literal IP URLs, not hostnames resolving to those IPs.</p>
+        <button id="save" type="submit">Save settings</button>
+      </fieldset>
+    </form>
+    </details>
+    <footer>Local settings only. No telemetry. Proxy mode covers browser web traffic, not a VPN or anonymity guarantee. WebRTC may use direct connections. Reload pages after switching.</footer>
+  </main>
+</body>
+</html>

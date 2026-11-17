@@ -1,0 +1,5 @@
+.local/
+worklogs/
+node_modules/
+*.zip
+*.crx
